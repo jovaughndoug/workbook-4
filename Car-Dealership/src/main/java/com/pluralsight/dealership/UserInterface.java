@@ -39,64 +39,51 @@ public class UserInterface {
                                     
                                  
                     """);
-            String choice = scanner.nextLine().toLowerCase();
+            String choice = scanner.nextLine();
             switch (choice) {
-                case "1":
+                case "1" -> {
                     System.out.println(" Enter Minimum Price: ");
                     double minPrice = Double.parseDouble(scanner.nextLine());
                     System.out.println(" Enter Maximum Price: ");
                     double maxPrice = Double.parseDouble(scanner.nextLine());
                     listVehicles(dealership.getVehiclesByPrice(minPrice, maxPrice));
-                    break;
-                case "2":
+                }
+                case "2" -> {
                     System.out.println(" Enter Make: ");
                     String make = scanner.nextLine();
                     System.out.println(" Enter Model: ");
                     String model = scanner.nextLine();
                     listVehicles(dealership.getVehicleByMakeModel(make, model));
-                    break;
-                case "3":
+                }
+                case "3" -> {
                     System.out.println(" Enter the year of the vehicle(minimum): ");
                     int minyYear = Integer.parseInt(scanner.nextLine());
                     System.out.println(" Enter the year of the vehicle(maximum): ");
                     int maxYear = Integer.parseInt((scanner.nextLine()));
                     listVehicles(dealership.getVehiclesByYear(minyYear, maxYear));
-                    break;
-                case "4":
+                }
+                case "4" -> {
                     System.out.println(" Enter the color of the vehicle: ");
                     String vehicleColor = scanner.nextLine();
-                    listVehicles( dealership.getVehiclesByColor(vehicleColor));
-                    break;
-                case "5":
+                    listVehicles(dealership.getVehiclesByColor(vehicleColor));
+                }
+                case "5" -> {
                     System.out.println(" Enter the Minimum Mileage: ");
                     int minMiles = Integer.parseInt(scanner.nextLine());
                     System.out.println(" Enter the Maximum Mileage: ");
                     int maxMiles = Integer.parseInt(scanner.nextLine());
-                    listVehicles( dealership.getVehiclesByMiles(minMiles, maxMiles));
-                    break;
-                case "6":
+                    listVehicles(dealership.getVehiclesByMiles(minMiles, maxMiles));
+                }
+                case "6" -> {
                     System.out.println(" Enter the Type of vehicle: ");
                     String type = scanner.nextLine();
-                    listVehicles( dealership.getByVehicleType(type));
-                    break;
-                case "7":
-                    listVehicles(dealership.getAllVehicles());
-                    break;
-                case "8":
-                    addVehicleScreen(scanner);
-                    break;
-
-                case "9":
-                    removeVehicleScreen(scanner);
-                    break;
-                case "99":
-                    looper=false;
-                    break;
-
-                default:
-                    System.out.println(" Sorry invalid Response Please Try Again :) ");
-
-
+                    listVehicles(dealership.getByVehicleType(type));
+                }
+                case "7" -> listVehicles(dealership.getAllVehicles());
+                case "8" -> addVehicleScreen(scanner);
+                case "9" -> removeVehicleScreen(scanner);
+                case "99" -> looper = false;
+                default -> System.out.println(" Sorry invalid Response Please Try Again :) ");
             }
 
 
@@ -104,8 +91,20 @@ public class UserInterface {
     }
 
     private  void listVehicles(List<Vehicle> vehicleArrayList) {
+        //todo fix formatting of list
+        //todo make header
+        String vin = "VIN";
+        String year = "Year";
+        String make = "Make";
+        String model = "Model";
+        String type = "Type";
+        String color = "Color";
+        String odometer = "Odometer";
+        String price = "Price";
+        System.out.printf("%15s %15s %15s %15s %15s %15s %15s %15s\n",vin,year,make,model,type,color,odometer,price);
         for (Vehicle v : vehicleArrayList) {
-            System.out.printf("%30s, %30s, %30s, %30s, %30d\n",v.getModel(), v.getMake(), v.getVehicleType(),v.getColor(),v.getOdometer());
+
+            System.out.printf("%15s %15s %15s %15s %15s %15s %15d %15.2f\n",v.getVin(), v.getYear(), v.getMake(),v.getModel(),v.getVehicleType(), v.getColor(), v.getOdometer(),v.getPrice());
         }
     }
 

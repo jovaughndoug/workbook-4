@@ -10,6 +10,17 @@ public class Vehicle {
     private final Integer odometer;
     private final Double price;
 
+    public String writetocsv() {
+        return vin +
+                "|" + year +
+                "|" + make +
+                "|" + model +
+                "|" + vehicleType +
+                "|" + color +
+                "|" + odometer +
+                "|" + price+ "\n";
+    }
+
     @Override
     public String toString() {
         return "Vehicle" +
@@ -23,6 +34,7 @@ public class Vehicle {
                 " price=" + price
                 ;
     }
+
 
     public Integer getVin() {
         return vin;

@@ -46,12 +46,12 @@ public class DealershipFileManager {
     }
 
     public void saveDealership(Dealership dealership) {
-        try {
-            FileWriter fileWriter = new FileWriter("./src/main/resources/inventory.csv");
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        //use try with resources to automatically close buffered writer
+        //create filewriter inline
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("src/main/resources/inventory-backup.csv", true))) {
             bufferedWriter.write(String.format("%s|%s|%s\n", dealership.getName(), dealership.getAddress(), dealership.getPhone()));
             for (Vehicle vehicle : dealership.getAllVehicles()) {
-                bufferedWriter.write(vehicle.toString());
+                bufferedWriter.write(vehicle.writetocsv());
             }
         } catch (IOException e) {
             System.out.println(" You Messed Up Writing the File Go Back");
